@@ -1,4 +1,5 @@
 using System;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Voucher.API.Domain.Dtos;
 using Voucher.API.Domain.Services;
@@ -30,10 +31,13 @@ public static class VoucherEndpoint
   //   return Results.Ok(voucher);
   // }
 
-  public static async Task<IResult> CreateVoucher([FromBody] VoucherCreateRequest request, CreateVoucherUseCase useCase)
+  public static async Task<IResult> CreateVoucher(HttpContext ctx, [FromBody] VoucherCreateRequest request, CreateVoucherUseCase useCase)
   {
+    //get the access token from the HttpContext
+    string token = await ctx.GetTokenAsync("access_token") ?? "";
+
     await useCase.Execute(request);
-    return Results.Ok();
+    return Results.Ok(token);
   }
 
   // public static async Task<IResult> UpdateVoucher(IVoucherService voucherService, string id, VoucherEntity request)
