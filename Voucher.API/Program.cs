@@ -14,6 +14,8 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddSingleton<IVoucherService, VoucherService>();
 builder.Services.AddSingleton<CreateVoucherUseCase>();
+builder.Services.AddSingleton<GetVoucherUseCase>();
+builder.Services.AddSingleton<DeleteVoucherUseCase>();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
