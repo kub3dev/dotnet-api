@@ -1,10 +1,18 @@
 using Keycloak.AuthServices.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
+using Voucher.API.Data.Services;
+using Voucher.API.Domain.Dtos;
+using Voucher.API.Domain.Services;
+using Voucher.API.Domain.UseCases;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration);
 builder.Services.AddAuthorization();
+
+builder.Services.AddSingleton<IVoucherService, VoucherService>();
+builder.Services.AddSingleton<CreateVoucherUseCase>();
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -55,6 +63,8 @@ var summaries = new[]
 };
 
 app.MapGet("/health", () => "health!").AllowAnonymous();
+app.MapGet("/vouchers", (IVoucherService service) => service.GetAsync()).AllowAnonymous();
+app.MapPost("/voucher", ([FromBody] VoucherCreateRequest request, CreateVoucherUseCase useCase) => useCase.Execute(request)).AllowAnonymous();
 
 app.MapGet("/", () =>
 {
