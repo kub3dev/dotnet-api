@@ -33,11 +33,8 @@ public static class VoucherEndpoint
 
   public static async Task<IResult> CreateVoucher(HttpContext ctx, [FromBody] VoucherCreateRequest request, CreateVoucherUseCase useCase)
   {
-    //get the access token from the HttpContext
-    string token = await ctx.GetTokenAsync("access_token") ?? "";
-
     await useCase.Execute(request);
-    return Results.Ok(token);
+    return Results.Ok();
   }
 
   // public static async Task<IResult> UpdateVoucher(IVoucherService voucherService, string id, VoucherEntity request)
