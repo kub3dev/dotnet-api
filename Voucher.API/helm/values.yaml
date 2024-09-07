@@ -86,12 +86,12 @@ livenessProbe:
   httpGet:
     path: /health
     port: http
-  initialDelaySeconds: 120
+#  initialDelaySeconds: 120
 readinessProbe:
   httpGet:
     path: /health
     port: http
-  initialDelaySeconds: 120
+#  initialDelaySeconds: 120
 
 autoscaling:
   enabled: false
