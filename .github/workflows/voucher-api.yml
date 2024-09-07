@@ -6,10 +6,10 @@ name: Voucher API | .NET
 on:
   push:
     branches: ["main"]
-    paths-ignore: ["Voucher.API/helm/**/*", "Identity.API/**/*"]
+    paths-ignore: ["Voucher.API/helm/**/*", "Identity.API/**/*", "helm/**/*"]
   pull_request:
     branches: ["main"]
-    paths-ignore: ["Voucher.API/helm/**/*", "Identity.API/**/*"]
+    paths-ignore: ["Voucher.API/helm/**/*", "Identity.API/**/*", "helm/**/*"]
 
   workflow_dispatch:
 
