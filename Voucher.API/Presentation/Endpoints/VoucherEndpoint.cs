@@ -15,7 +15,7 @@ public static class VoucherEndpoint
     app.MapGet("/vouchers", GetVouchers).RequireAuthorization();
     app.MapGet("/vouchers/{id}", GetVoucher).RequireAuthorization();
     app.MapPost("/vouchers", CreateVoucher).RequireAuthorization();
-    // app.MapPut("/vouchers/{id}", UpdateVoucher).RequireAuthorization();
+    app.MapPut("/vouchers/{id}", UpdateVoucher).RequireAuthorization();
     app.MapDelete("/vouchers/{id}", RemoveVoucher).RequireAuthorization();
   }
 
@@ -37,11 +37,11 @@ public static class VoucherEndpoint
     return Results.Ok();
   }
 
-  // public static async Task<IResult> UpdateVoucher(IVoucherService voucherService, string id, VoucherEntity request)
-  // {
-  //   await voucherService.UpdateAsync(id, request);
-  //   return Results.Ok();
-  // }
+  public static async Task<IResult> UpdateVoucher(UpdateVoucherUseCase useCase, string id, VoucherUpdateRequest request)
+  {
+    await useCase.Execute(id, request);
+    return Results.Ok();
+  }
 
   public static async Task<IResult> RemoveVoucher(DeleteVoucherUseCase useCase, string id)
   {
