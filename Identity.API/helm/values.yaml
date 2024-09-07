@@ -44,21 +44,21 @@ service:
   port: 8080
 
 ingress:
-  enabled: false
+  enabled: true
   className: nginx
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-issuer
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: api.kub3.dev
+    - host: identity.kub3.dev
       paths:
-        - path: /auth
+        - path: /
           pathType: Prefix
   tls:
-    - secretName: chart-api-tls
+    - secretName: chart-identity-tls
       hosts:
-        - api.kub3.dev
+        - identity.kub3.dev
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
