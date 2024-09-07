@@ -8,7 +8,7 @@ image:
   repository: fclebinho/dotnet-api
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 2024.9.7.11.54.42
+  tag: 2024.9.7.12.3.25
 
 imagePullSecrets: []
 nameOverride: ""
