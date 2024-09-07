@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.API", "Identity.API\Identity.API.csproj", "{FCA984FE-B289-493E-8C41-506C0731FD28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Voucher.API", "Voucher.API\Voucher.API.csproj", "{E00A81B5-E6BC-487A-93E2-4686FE99DD31}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FCA984FE-B289-493E-8C41-506C0731FD28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCA984FE-B289-493E-8C41-506C0731FD28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCA984FE-B289-493E-8C41-506C0731FD28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCA984FE-B289-493E-8C41-506C0731FD28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E00A81B5-E6BC-487A-93E2-4686FE99DD31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E00A81B5-E6BC-487A-93E2-4686FE99DD31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E00A81B5-E6BC-487A-93E2-4686FE99DD31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E00A81B5-E6BC-487A-93E2-4686FE99DD31}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

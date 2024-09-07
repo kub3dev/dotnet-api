@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: fclebinho/dotnet-api
+  repository: fclebinho/identity-api
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: 2024.9.7.12.12.11
@@ -51,14 +51,14 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: dotnet.kub3.dev
+    - host: api.kub3.dev
       paths:
-        - path: /
+        - path: /auth
           pathType: Prefix
   tls:
-    - secretName: chart-dotnet-tls
+    - secretName: chart-api-tls
       hosts:
-        - dotnet.kub3.dev
+        - api.kub3.dev
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

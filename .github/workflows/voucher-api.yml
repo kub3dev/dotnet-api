@@ -1,16 +1,20 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
-name: .NET
+name: Voucher API | .NET
 
 on:
   push:
     branches: ["main"]
+    paths-ignore: ["Voucher.API/helm/**/*", "Identity.API/**/*"]
   pull_request:
     branches: ["main"]
+    paths-ignore: ["Voucher.API/helm/**/*", "Identity.API/**/*"]
+
+  workflow_dispatch:
 
 env:
-  CONTAINER_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/${{ vars.DOCKERHUB_CONTAINER_NAME }}
+  CONTAINER_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/voucher-api
 
 jobs:
   build:
@@ -49,7 +53,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
-          file: ./Dotnet.API/Dockerfile
+          file: ./Voucher.API/Dockerfile
           push: true
           tags: |
             ${{ env.CONTAINER_NAME }}:${{ steps.build-number.outputs.BUILD_NUMBER }}
@@ -57,7 +61,7 @@ jobs:
 
       - name: Update values.yaml
         run: |
-          cd Dotnet.API/helm
+          cd Voucher.API/helm
           sed -i 's|tag:.*|tag: '${{ steps.build-number.outputs.BUILD_NUMBER }}'|' values.yaml 
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'

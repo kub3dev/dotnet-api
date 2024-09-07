@@ -8,17 +8,17 @@ USER app
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG configuration=Release
 WORKDIR /src
-COPY ["Dotnet.API/Dotnet.API.csproj", "Dotnet.API/"]
-RUN dotnet restore "Dotnet.API/Dotnet.API.csproj"
+COPY ["Identity.API/Identity.API.csproj", "Identity.API/"]
+RUN dotnet restore "Identity.API/Identity.API.csproj"
 COPY . .
-WORKDIR "/src/Dotnet.API"
-RUN dotnet build "Dotnet.API.csproj" -c $configuration -o /app/build
+WORKDIR "/src/Identity.API"
+RUN dotnet build "Identity.API.csproj" -c $configuration -o /app/build
 
 FROM build AS publish
 ARG configuration=Release
-RUN dotnet publish "Dotnet.API.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Identity.API.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Dotnet.API.dll"]
+ENTRYPOINT ["dotnet", "Identity.API.dll"]
