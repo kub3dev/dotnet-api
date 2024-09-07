@@ -9,4 +9,5 @@ public class VoucherEntity
   public decimal Amount { get; set; }
   public string Kind { get; set; } = null!;
   public string Issuer { get; set; } = null!;
+  public DateTime? CreatedAt { get; set; } = null!;
 }

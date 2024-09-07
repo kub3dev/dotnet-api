@@ -10,14 +10,11 @@ public class VoucherModel
   [BsonId]
   [BsonRepresentation(BsonType.ObjectId)]
   public string? Id { get; set; }
-
   public string Description { get; set; } = null!;
-
   public decimal Amount { get; set; }
-
   public string Kind { get; set; } = null!;
-
   public string Issuer { get; set; } = null!;
+  public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
   public static VoucherModel FromEntity(VoucherEntity entity)
   {
@@ -27,7 +24,7 @@ public class VoucherModel
       Description = entity.Description,
       Amount = entity.Amount,
       Kind = entity.Kind,
-      Issuer = entity.Issuer
+      Issuer = entity.Issuer,
     };
   }
 
@@ -39,7 +36,8 @@ public class VoucherModel
       Description = Description,
       Amount = Amount,
       Kind = Kind,
-      Issuer = Issuer
+      Issuer = Issuer,
+      CreatedAt = CreatedAt
     };
   }
 }
