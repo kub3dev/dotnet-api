@@ -22,9 +22,9 @@ env:
   - name: KEYCLOAK__CREDENTIALS__SECRET
     value: "KKAdZXeBlT6INUh0A46B2lRpwkMBmvkZ"
   - name: KEYCLOAK__CONFIDENTIAL_PORT
-    value: 0
+    value: "0"
   - name: KEYCLOAK__VERIFY_TOKEN_AUDIENCE
-    value: false
+    value: "false"
 
 imagePullSecrets: []
 nameOverride: ""
