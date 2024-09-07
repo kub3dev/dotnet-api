@@ -54,7 +54,7 @@ ingress:
     - host: dotnet.kub3.dev
       paths:
         - path: /hello
-          pathType: ImplementationSpecific
+          pathType: Prefix
   tls:
     - secretName: chart-dotnet-tls
       hosts:
