@@ -13,10 +13,10 @@ public class CreateVoucherUseCase
     _voucherService = voucherService;
   }
 
-  public void Execute(VoucherCreateRequest request)
+  public async Task Execute(VoucherCreateRequest request)
   {
     if (request == null) throw new ArgumentNullException(nameof(request));
 
-    _voucherService.CreateAsync(request.ToEntity());
+    await _voucherService.CreateAsync(request.ToEntity());
   }
 }

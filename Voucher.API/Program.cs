@@ -5,6 +5,7 @@ using Voucher.API.Data.Services;
 using Voucher.API.Domain.Dtos;
 using Voucher.API.Domain.Services;
 using Voucher.API.Domain.UseCases;
+using Voucher.API.Presentation.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,8 +64,6 @@ var summaries = new[]
 };
 
 app.MapGet("/health", () => "health!").AllowAnonymous();
-app.MapGet("/vouchers", (IVoucherService service) => service.GetAsync()).AllowAnonymous();
-app.MapPost("/voucher", ([FromBody] VoucherCreateRequest request, CreateVoucherUseCase useCase) => useCase.Execute(request)).AllowAnonymous();
 
 app.MapGet("/", () =>
 {
@@ -81,6 +80,8 @@ app.MapGet("/", () =>
 .RequireAuthorization()
 .WithName("GetWeatherForecast")
 .WithOpenApi();
+
+app.MapVoucherEndpoints();
 
 app.Run();
 
