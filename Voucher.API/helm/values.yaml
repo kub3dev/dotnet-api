@@ -11,20 +11,13 @@ image:
   tag: 2024.9.7.16.41.21
 
 env:
-  - name: "KEYCLOAK__REALM"
-    value: "vouchers"
-  - name: "KEYCLOAK__AUTH_SERVER-URL"
-    value: "https://keycloak.kub3.dev/"
-  - name: "KEYCLOAK__SSL_REQUIRED"
-    value: "none"
-  - name: "KEYCLOAK__RESOURCE"
-    value: "vouchers-client"
-  - name: "KEYCLOAK__CREDENTIALS__SECRET"
-    value: "KKAdZXeBlT6INUh0A46B2lRpwkMBmvkZ"
-  - name: "KEYCLOAK__CONFIDENTIAL_PORT"
-    value: "0"
-  - name: "KEYCLOAK__VERIFY_TOKEN_AUDIENCE"
-    value: "false"
+  KEYCLOAK__REALM: "vouchers"
+  KEYCLOAK__AUTH_SERVER-URL: "https://keycloak.kub3.dev/"
+  KEYCLOAK__SSL_REQUIRED: "none"
+  KEYCLOAK__RESOURCE: "vouchers-client"
+  KEYCLOAK__CREDENTIALS__SECRET: "KKAdZXeBlT6INUh0A46B2lRpwkMBmvkZ"
+  KEYCLOAK__CONFIDENTIAL_PORT: "0"
+  KEYCLOAK__VERIFY_TOKEN_AUDIENCE: "false"
 
 imagePullSecrets: []
 nameOverride: ""
