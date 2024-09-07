@@ -8,7 +8,7 @@ image:
   repository: fclebinho/identity-api
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 2024.9.7.14.12.35
+  tag: 2024.9.7.14.33.43
 
 imagePullSecrets: []
 nameOverride: ""
