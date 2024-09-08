@@ -17,6 +17,9 @@ public class UpdateVoucherUseCase
   {
     if (request == null) throw new ArgumentNullException(nameof(request));
 
-    await _voucherService.UpdateAsync(id, request.ToEntity());
+    var voucher = request.ToEntity();
+    voucher.Id = id;
+
+    await _voucherService.UpdateAsync(id, voucher);
   }
 }
