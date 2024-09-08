@@ -1,6 +1,9 @@
 using System;
+using System.Security.Claims;
 using Voucher.API.Domain.Dtos;
 using Voucher.API.Domain.Services;
+using Voucher.Core;
+using Voucher.Core.Models;
 
 namespace Voucher.API.Domain.UseCases;
 
@@ -13,13 +16,14 @@ public class UpdateVoucherUseCase
     _voucherService = voucherService;
   }
 
-  public async Task Execute(string id, VoucherUpdateRequest request)
+  public async Task Execute(User issuer, string id, VoucherUpdateRequest request)
   {
     if (request == null) throw new ArgumentNullException(nameof(request));
 
-    var voucher = request.ToEntity();
-    voucher.Id = id;
+    var entity = request.ToEntity();
+    entity.Id = id;
+    entity.Issuer = issuer;
 
-    await _voucherService.UpdateAsync(id, voucher);
+    await _voucherService.UpdateAsync(id, entity);
   }
 }

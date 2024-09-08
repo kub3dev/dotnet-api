@@ -1,6 +1,6 @@
 using System;
 
-namespace Voucher.API.Domain.Repositories;
+namespace Voucher.Core.Repositories;
 
 public interface IDatabaseRepository<T>
 {

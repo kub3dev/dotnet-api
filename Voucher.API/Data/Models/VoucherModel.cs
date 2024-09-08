@@ -2,6 +2,7 @@ using System;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Voucher.API.Domain.Entities;
+using Voucher.Core.Models;
 
 namespace Voucher.API.Data.Models;
 
@@ -13,7 +14,7 @@ public class VoucherModel
   public string? Description { get; set; } = null!;
   public decimal? Amount { get; set; }
   public string? Kind { get; set; } = null!;
-  public string? Issuer { get; set; } = null!;
+  public User? Issuer { get; set; } = null!;
   public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
 
   public static VoucherModel FromEntity(VoucherEntity entity)

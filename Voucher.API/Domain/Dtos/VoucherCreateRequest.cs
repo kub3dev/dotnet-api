@@ -8,7 +8,6 @@ public class VoucherCreateRequest
   public string? Description { get; set; } = null!;
   public decimal? Amount { get; set; } = null!;
   public string? Kind { get; set; } = null!;
-  public string? Issuer { get; set; } = null!;
 
   internal VoucherEntity ToEntity()
   {
@@ -17,7 +16,6 @@ public class VoucherCreateRequest
       Description = Description,
       Amount = Amount,
       Kind = Kind,
-      Issuer = Issuer
     };
   }
 }

@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Keycloak.AuthServices.Authentication;
 using Microsoft.OpenApi.Models;
 using Voucher.API.Data.Repositories;

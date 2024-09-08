@@ -1,8 +1,8 @@
 using System;
+using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
-using Voucher.API.Domain.Repositories;
 
-namespace Voucher.API.Infrastructure;
+namespace Voucher.Core.Database;
 
 public class MongoDatabase<T>
 {

@@ -1,9 +1,12 @@
 using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Voucher.API.Domain.Dtos;
 using Voucher.API.Domain.Services;
 using Voucher.API.Domain.UseCases;
+using Voucher.Core;
 
 namespace Voucher.API.Presentation.Endpoints;
 
@@ -31,15 +34,15 @@ public static class VoucherEndpoint
     return Results.Ok(voucher);
   }
 
-  public static async Task<IResult> CreateVoucher(HttpContext ctx, [FromBody] VoucherCreateRequest request, CreateVoucherUseCase useCase)
+  public static async Task<IResult> CreateVoucher(ClaimsPrincipal claims, HttpContext ctx, [FromBody] VoucherCreateRequest request, CreateVoucherUseCase useCase)
   {
-    await useCase.Execute(request);
+    await useCase.Execute(claims.ToUser(), request);
     return Results.Ok();
   }
 
-  public static async Task<IResult> UpdateVoucher(UpdateVoucherUseCase useCase, string id, VoucherUpdateRequest request)
+  public static async Task<IResult> UpdateVoucher(ClaimsPrincipal claims, UpdateVoucherUseCase useCase, string id, VoucherUpdateRequest request)
   {
-    await useCase.Execute(id, request);
+    await useCase.Execute(claims.ToUser(), id, request);
     return Results.Ok();
   }
 

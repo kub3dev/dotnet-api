@@ -2,7 +2,7 @@ using System;
 using MongoDB.Driver;
 using Voucher.API.Data.Models;
 using Voucher.API.Domain.Repositories;
-using Voucher.API.Infrastructure;
+using Voucher.Core.Database;
 
 namespace Voucher.API.Data.Repositories;
 
@@ -26,8 +26,8 @@ public class VoucherRepository : IVoucherRepository
       await _database.Collection.FindAsync(id).Result.FirstOrDefaultAsync();
 
   public async Task RemoveAsync(string id) =>
-     await _database.Collection.DeleteOneAsync(id);
+     await _database.Collection.DeleteOneAsync(x => x.Id == id);
 
   public async Task UpdateAsync(string id, VoucherModel request) =>
-      await _database.Collection.ReplaceOneAsync(id, request);
+      await _database.Collection.ReplaceOneAsync(x => x.Id == id, request);
 }

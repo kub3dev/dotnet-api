@@ -34,6 +34,6 @@ public class VoucherService : IVoucherService
     public async Task UpdateAsync(string id, VoucherEntity request) =>
         await _repository.UpdateAsync(id, VoucherModel.FromEntity(request));
 
-    public async Task RemoveAsync(string id) =>
-        await _repository.RemoveAsync(id);
+    public Task RemoveAsync(string id) =>
+         _repository.RemoveAsync(id);
 }
