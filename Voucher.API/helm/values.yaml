@@ -8,7 +8,7 @@ image:
   repository: fclebinho/voucher-api
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 2024.9.8.16.43.15
+  tag: 2024.9.8.23.19.42
 
 env:
   KEYCLOAK__REALM: "vouchers"
