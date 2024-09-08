@@ -1,8 +1,8 @@
 using Keycloak.AuthServices.Authentication;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
+using Voucher.API.Data.Repositories;
 using Voucher.API.Data.Services;
-using Voucher.API.Domain.Dtos;
+using Voucher.API.Domain.Repositories;
 using Voucher.API.Domain.Services;
 using Voucher.API.Domain.UseCases;
 using Voucher.API.Presentation.Endpoints;
@@ -12,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration);
 builder.Services.AddAuthorization();
 
+builder.Services.AddSingleton<IVoucherRepository, VoucherRepository>();
 builder.Services.AddSingleton<IVoucherService, VoucherService>();
 builder.Services.AddSingleton<CreateVoucherUseCase>();
 builder.Services.AddSingleton<GetVoucherUseCase>();
@@ -59,36 +60,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// app.UseHttpsRedirection();
-
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
 app.MapGet("/health", () => "health!").AllowAnonymous();
 
-app.MapGet("/", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.RequireAuthorization()
-.WithName("GetWeatherForecast")
-.WithOpenApi();
-
-app.MapVoucherEndpoints();
+app.MapVoucher();
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

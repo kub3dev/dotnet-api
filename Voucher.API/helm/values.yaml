@@ -18,7 +18,8 @@ env:
   KEYCLOAK__CREDENTIALS__SECRET: "KKAdZXeBlT6INUh0A46B2lRpwkMBmvkZ"
   KEYCLOAK__CONFIDENTIAL_PORT: "0"
   KEYCLOAK__VERIFY_TOKEN_AUDIENCE: "false"
-  CONNECTIONSTRINGS__MONGODB: "mongodb://mongo:mongodb@gomes.dev:27017"
+  MONGODB__URI: "mongodb://mongo:mongodb@gomes.dev:27017"
+  MONGODB__DATABASE: "vouchers"
 
 imagePullSecrets: []
 nameOverride: ""

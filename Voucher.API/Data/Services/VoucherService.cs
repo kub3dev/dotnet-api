@@ -2,47 +2,38 @@ using System;
 using MongoDB.Driver;
 using Voucher.API.Data.Models;
 using Voucher.API.Domain.Entities;
+using Voucher.API.Domain.Repositories;
 using Voucher.API.Domain.Services;
 
 namespace Voucher.API.Data.Services;
 
 public class VoucherService : IVoucherService
 {
-    private readonly IMongoCollection<VoucherModel> _vouchersCollection;
+    private readonly IVoucherRepository _repository;
 
-    public VoucherService(IConfiguration configuration)
+    public VoucherService(IVoucherRepository repository)
     {
-        var connectionString = configuration.GetConnectionString("MongoDb");
-        if (connectionString == null)
-        {
-            Console.WriteLine("You must set your 'MONGODB_URI' environment variable. To learn how to set it, see https://www.mongodb.com/docs/drivers/csharp/current/quick-start/#set-your-connection-string");
-        }
-
-        var mongoClient = new MongoClient(connectionString);
-
-        var mongoDatabase = mongoClient.GetDatabase("voucher-api");
-
-        _vouchersCollection = mongoDatabase.GetCollection<VoucherModel>("vouches");
+        _repository = repository;
     }
 
     public async Task<List<VoucherEntity>> GetAsync()
     {
-        var vouchers = await _vouchersCollection.Find(_ => true).ToListAsync();
+        var vouchers = await _repository.GetAsync();
         return vouchers.Select(x => x.ToEntity()).ToList();
     }
 
     public async Task<VoucherEntity?> GetAsync(string id)
     {
-        var voucher = await _vouchersCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
-        return voucher.ToEntity();
+        var voucher = await _repository.GetAsync(id);
+        return voucher?.ToEntity();
     }
 
     public async Task CreateAsync(VoucherEntity request) =>
-        await _vouchersCollection.InsertOneAsync(VoucherModel.FromEntity(request));
+        await _repository.CreateAsync(VoucherModel.FromEntity(request));
 
     public async Task UpdateAsync(string id, VoucherEntity request) =>
-        await _vouchersCollection.ReplaceOneAsync(x => x.Id == id, VoucherModel.FromEntity(request));
+        await _repository.UpdateAsync(id, VoucherModel.FromEntity(request));
 
     public async Task RemoveAsync(string id) =>
-        await _vouchersCollection.DeleteOneAsync(x => x.Id == id);
+        await _repository.RemoveAsync(id);
 }

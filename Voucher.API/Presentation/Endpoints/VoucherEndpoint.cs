@@ -10,7 +10,7 @@ namespace Voucher.API.Presentation.Endpoints;
 public static class VoucherEndpoint
 {
 
-  public static void MapVoucherEndpoints(this WebApplication app)
+  public static void MapVoucher(this WebApplication app)
   {
     app.MapGet("/vouchers", GetVouchers).RequireAuthorization();
     app.MapGet("/vouchers/{id}", GetVoucher).RequireAuthorization();
