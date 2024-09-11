@@ -62,14 +62,14 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: voucher.kub3.dev
+    - host: api.voucher.kub3.dev
       paths:
         - path: /
           pathType: Prefix
   tls:
-    - secretName: chart-voucher-tls
+    - secretName: chart-voucher-api-tls
       hosts:
-        - voucher.kub3.dev
+        - api.voucher.kub3.dev
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
